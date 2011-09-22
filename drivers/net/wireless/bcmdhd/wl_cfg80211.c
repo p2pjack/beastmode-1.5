@@ -2600,7 +2600,11 @@ wl_cfg80211_disconnect(struct wiphy *wiphy, struct net_device *dev,
 	scb_val_t scbval;
 	bool act = false;
 	s32 err = 0;
+<<<<<<< HEAD
 	u8 *curbssid;
+=======
+
+>>>>>>> d72feaa... net: wireless: bcmdhd: Fix scan notification in case of scan abort
 	WL_ERR(("Reason %d\n", reason_code));
 	CHECK_SYS_UP(wl);
 	act = *(bool *) wl_read_prof(wl, dev, WL_PROF_ACT);
@@ -3451,8 +3455,13 @@ wl_cfg80211_scan_abort(struct wl_priv *wl, struct net_device *ndev)
 		cfg80211_scan_done(wl->scan_request, true);
 		wl->scan_request = NULL;
 	}
+<<<<<<< HEAD
 	wl_clr_drv_status(wl, SCANNING, ndev);
 	spin_unlock_irqrestore(&wl->cfgdrv_lock, flags);
+=======
+	wl_clr_drv_status(wl, SCANNING);
+	dhd_os_spin_unlock((dhd_pub_t *)(wl->pub), flags);
+>>>>>>> d72feaa... net: wireless: bcmdhd: Fix scan notification in case of scan abort
 	if (params)
 		kfree(params);
 	return err;
@@ -5401,8 +5410,13 @@ wl_notify_scan_status(struct wl_priv *wl, struct net_device *ndev,
 	if (wl->iscan_on && wl->iscan_kickstart)
 		return wl_wakeup_iscan(wl_to_iscan(wl));
 
+<<<<<<< HEAD
 	mutex_lock(&wl->usr_sync);
 	wl_clr_drv_status(wl, SCANNING, ndev);
+=======
+	wl_clr_drv_status(wl, SCANNING);
+	rtnl_lock();
+>>>>>>> d72feaa... net: wireless: bcmdhd: Fix scan notification in case of scan abort
 	err = wldev_ioctl(ndev, WLC_GET_CHANNEL, &channel_inform,
 		sizeof(channel_inform), false);
 	if (unlikely(err)) {
@@ -6015,6 +6029,7 @@ wl_cfg80211_netdev_notifier_call(struct notifier_block * nb,
 	struct wl_priv *wl = wlcfg_drv_priv;
 
 	WL_DBG(("Enter \n"));
+<<<<<<< HEAD
 	if (!wdev || dev == wl_to_prmry_ndev(wl))
 		return NOTIFY_DONE;
 	switch (state) {
@@ -6051,6 +6066,10 @@ static void wl_notify_escan_complete(struct wl_priv *wl,
 	WL_DBG(("Enter \n"));
 	wl_clr_drv_status(wl, SCANNING, ndev);
 	if (p2p_is_on(wl))
+=======
+	wl_clr_drv_status(wl, SCANNING);
+	if (wl->p2p_supported && p2p_on(wl))
+>>>>>>> d72feaa... net: wireless: bcmdhd: Fix scan notification in case of scan abort
 		wl_clr_p2p_status(wl, SCANNING);
 
 	spin_lock_irqsave(&wl->cfgdrv_lock, flags);
@@ -7364,6 +7383,72 @@ s32 wl_cfg80211_set_wps_p2p_ie(struct net_device *net, char *buf, int len,
 
 	return ret;
 }
+<<<<<<< HEAD
+=======
+
+static __used void wl_dongle_poweron(struct wl_priv *wl)
+{
+	WL_DBG(("Enter \n"));
+	dhd_customer_gpio_wlan_ctrl(WLAN_RESET_ON);
+
+#if defined(BCMLXSDMMC)
+	sdioh_start(NULL, 0);
+#endif
+#if defined(BCMLXSDMMC)
+	sdioh_start(NULL, 1);
+#endif
+	wl_cfg80211_resume(wl_to_wiphy(wl));
+}
+
+static __used void wl_dongle_poweroff(struct wl_priv *wl)
+{
+	WL_DBG(("Enter \n"));
+#if LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 39)
+	wl_cfg80211_suspend(wl_to_wiphy(wl), NULL);
+#else
+	wl_cfg80211_suspend(wl_to_wiphy(wl));
+#endif
+
+#if defined(BCMLXSDMMC)
+	sdioh_stop(NULL);
+#endif
+	/* clean up dtim_skip setting */
+	dhd_customer_gpio_wlan_ctrl(WLAN_RESET_OFF);
+}
+
+static int wl_debugfs_add_netdev_params(struct wl_priv *wl)
+{
+	char buf[10+IFNAMSIZ];
+	struct dentry *fd;
+	s32 err = 0;
+
+	WL_TRACE(("In\n"));
+	sprintf(buf, "netdev:%s", wl_to_prmry_ndev(wl)->name);
+	wl->debugfsdir = debugfs_create_dir(buf, wl_to_wiphy(wl)->debugfsdir);
+
+	fd = debugfs_create_u16("beacon_int", S_IRUGO, wl->debugfsdir,
+		(u16 *)&wl->profile->beacon_interval);
+	if (!fd) {
+		err = -ENOMEM;
+		goto err_out;
+	}
+
+	fd = debugfs_create_u8("dtim_period", S_IRUGO, wl->debugfsdir,
+		(u8 *)&wl->profile->dtim_period);
+	if (!fd) {
+		err = -ENOMEM;
+		goto err_out;
+	}
+
+err_out:
+	return err;
+}
+
+static void wl_debugfs_remove_netdev(struct wl_priv *wl)
+{
+	WL_DBG(("Enter \n"));
+}
+>>>>>>> d72feaa... net: wireless: bcmdhd: Fix scan notification in case of scan abort
 
 static const struct rfkill_ops wl_rfkill_ops = {
 	.set_block = wl_rfkill_set
