@@ -1783,6 +1783,13 @@ config ARCH_MSM_FLASHLIGHT
 	help
 	  The flashlight driver is for MSM series.
 
+config ARCH_MSM_FLASHLIGHT_DEATH_RAY
+        bool "Enable high-brightness (death ray) mode"
+        depends on ARCH_MSM_FLASHLIGHT
+        default n
+        help
+          Enables a high-brightness mode for the flash LED. Dangerous
+
 config QSD_AUDIO
 	bool "QSD audio"
 	depends on ARCH_MSM_SCORPION && MSM_DALRPC && ANDROID_PMEM && !MSM_SMP
