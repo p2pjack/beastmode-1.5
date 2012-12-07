@@ -1,0 +1,1 @@
+cmd_drivers/video/msm/vidc/vidc_vdec.o := /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL    -r -o drivers/video/msm/vidc/vidc_vdec.o drivers/video/msm/vidc/common/dec/vdec.o 
