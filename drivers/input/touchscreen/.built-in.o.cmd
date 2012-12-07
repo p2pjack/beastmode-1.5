@@ -1,0 +1,1 @@
+cmd_drivers/input/touchscreen/built-in.o :=  /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL    -r -o drivers/input/touchscreen/built-in.o drivers/input/touchscreen/atmel.o drivers/input/touchscreen/synaptics_3k.o drivers/input/touchscreen/elan_ktf2k.o 
