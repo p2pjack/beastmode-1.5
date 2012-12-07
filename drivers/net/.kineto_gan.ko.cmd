@@ -1,0 +1,1 @@
+cmd_drivers/net/kineto_gan.ko := /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL -r  -T /home/p2pjack/android/kernel/beast/scripts/module-common.lds --build-id  -o drivers/net/kineto_gan.ko drivers/net/kineto_gan.o drivers/net/kineto_gan.mod.o
