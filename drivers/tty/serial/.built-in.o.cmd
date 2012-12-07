@@ -1,0 +1,1 @@
+cmd_drivers/tty/serial/built-in.o :=  /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL    -r -o drivers/tty/serial/built-in.o drivers/tty/serial/serial_core.o drivers/tty/serial/msm_serial.o drivers/tty/serial/msm_serial_hs.o drivers/tty/serial/msm_serial_hs_brcm.o drivers/tty/serial/msm_serial_hs_ti_dc.o 
