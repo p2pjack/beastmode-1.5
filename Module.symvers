@@ -1440,6 +1440,7 @@
 0x00000000	nr_free_buffer_pages	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	klist_init	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	xfrm_state_unregister_afinfo	vmlinux	EXPORT_SYMBOL
+0x00000000	snd_card_unref	vmlinux	EXPORT_SYMBOL
 0x00000000	dm_noflush_suspending	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	msm_hs_set_mctrl	vmlinux	EXPORT_SYMBOL
 0x00000000	nla_strlcpy	vmlinux	EXPORT_SYMBOL
