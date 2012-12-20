@@ -544,6 +544,14 @@ static struct htc_headset_microp_platform_data htc_headset_microp_data = {
 	.adc_remote		= {0, 33, 38, 82, 95, 167},
 };
 
+static struct htc_headset_microp_platform_data htc_headset_microp_data_xd = {
+	.remote_int		= 1 << 13,
+	.remote_irq		= MSM_uP_TO_INT(13),
+	.remote_enable_pin	= 0,
+	.adc_channel		= 0x01,
+	.adc_remote		= {0, 33, 38, 85, 95, 197},
+};
+
 static struct platform_device htc_headset_microp = {
 	.name	= "HTC_HEADSET_MICROP",
 	.id	= -1,
@@ -552,6 +560,13 @@ static struct platform_device htc_headset_microp = {
 	},
 };
 
+static struct platform_device htc_headset_microp_xd = {
+	.name	= "HTC_HEADSET_MICROP",
+	.id	= -1,
+	.dev	= {
+		.platform_data	= &htc_headset_microp_data_xd,
+	},
+};
 
 /* HTC_HEADSET_MGR Driver */
 static struct platform_device *headset_devices[] = {

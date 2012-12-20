@@ -537,8 +537,8 @@ static struct platform_device htc_headset_pmic = {
 
 /* HTC_HEADSET_MICROP Driver */
 static struct htc_headset_microp_platform_data htc_headset_microp_data = {
-	.remote_int		= 1 << 5,
-	.remote_irq		= MSM_uP_TO_INT(5),
+	.remote_int		= 1 << 13,
+	.remote_irq		= MSM_uP_TO_INT(13),
 	.remote_enable_pin	= 1 << 4,
 	.adc_channel		= 0x01,
 	.adc_remote		= {0, 33, 38, 82, 95, 167},
