@@ -544,6 +544,8 @@ static struct htc_headset_microp_platform_data htc_headset_microp_data = {
 	.adc_remote		= {0, 33, 38, 82, 95, 167},
 };
 
+
+
 static struct platform_device htc_headset_microp = {
 	.name	= "HTC_HEADSET_MICROP",
 	.id	= -1,
@@ -551,6 +553,7 @@ static struct platform_device htc_headset_microp = {
 		.platform_data	= &htc_headset_microp_data,
 	},
 };
+
 
 
 /* HTC_HEADSET_MGR Driver */

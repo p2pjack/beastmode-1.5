@@ -5011,7 +5011,6 @@
 0x00000000	blk_queue_flush_queueable	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	tcp_twsk_destructor	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	scm_detach_fds	vmlinux	EXPORT_SYMBOL
-0x00000000	ds2746_charger_switch	vmlinux	EXPORT_SYMBOL
 0x00000000	rtc_ktime_to_tm	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	put_pid	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	snd_pcm_format_name	vmlinux	EXPORT_SYMBOL_GPL

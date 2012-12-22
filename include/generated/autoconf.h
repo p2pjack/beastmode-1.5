@@ -1,6 +1,6 @@
 /*
  * Automatically generated C config: don't edit
- * Linux/arm 3.0.56 Kernel Configuration
+ * Linux/arm 3.0.57 Kernel Configuration
  */
 #define CONFIG_IP6_NF_MATCH_AH 1
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -340,7 +340,7 @@
 #define CONFIG_UNIX 1
 #define CONFIG_HAVE_CLK 1
 #define CONFIG_CRYPTO_HASH2 1
-#define CONFIG_DEFAULT_HOSTNAME "(XDA)"
+#define CONFIG_DEFAULT_HOSTNAME "(none)"
 #define CONFIG_CPU_FREQ_GOV_POWERSAVE 1
 #define CONFIG_WIFI_NVS_PROC_CREATE 1
 #define CONFIG_INET_ESP 1
@@ -526,7 +526,7 @@
 #define CONFIG_MSM_CAMERA 1
 #define CONFIG_DEBUG_KERNEL 1
 #define CONFIG_COMPAT_BRK 1
-#define CONFIG_LOCALVERSION "-BeastMode-v1.5-MOD-V0.2"
+#define CONFIG_LOCALVERSION "-BeastMode-v1.5-MOD-V0.3.1"
 #define CONFIG_MACH_SPADE 1
 #define CONFIG_MACH_NO_WESTBRIDGE 1
 #define CONFIG_CRYPTO 1
@@ -745,6 +745,7 @@
 #define CONFIG_SCSI_MULTI_LUN 1
 #define CONFIG_ANDROID_RAM_CONSOLE_ERROR_CORRECTION 1
 #define CONFIG_NEW_LEDS 1
+#define CONFIG_SWAP 1
 #define CONFIG_CRC_CCITT 1
 #define CONFIG_ANDROID_PMEM 1
 #define CONFIG_BLK_DEV_SD 1
