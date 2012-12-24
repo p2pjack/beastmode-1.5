@@ -1,3 +1,0 @@
-kernel/drivers/input/touchscreen/atmel.ko
-kernel/drivers/input/touchscreen/synaptics_3k.ko
-kernel/drivers/input/touchscreen/elan_ktf2k.ko

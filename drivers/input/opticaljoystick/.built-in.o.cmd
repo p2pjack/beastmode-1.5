@@ -1,1 +1,0 @@
-cmd_drivers/input/opticaljoystick/built-in.o :=  /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL    -r -o drivers/input/opticaljoystick/built-in.o drivers/input/opticaljoystick/curcial_spi.o 

@@ -1,1 +1,0 @@
-cmd_sound/soc/msm_1x/built-in.o :=  /home/p2pjack/android/kernel/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld -EL    -r -o sound/soc/msm_1x/built-in.o sound/soc/msm_1x/snd-soc-msm7kv2-dai.o sound/soc/msm_1x/snd-soc-msmv2.o sound/soc/msm_1x/snd-soc-msm7kv2.o 
