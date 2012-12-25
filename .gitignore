@@ -80,6 +80,7 @@ GTAGS
 \#*#
 
 # other
-build
+.config
+.config.old
 def
 zip
