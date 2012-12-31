@@ -5486,23 +5486,6 @@ int dhd_os_wake_unlock(dhd_pub_t *pub)
 	return ret;
 }
 
-int dhd_os_check_wakelock(void *dhdp)
-{
-#ifdef CONFIG_HAS_WAKELOCK
-	dhd_pub_t *pub = (dhd_pub_t *)dhdp;
-	dhd_info_t *dhd;
-
-	if (!pub)
-		return 0;
-	dhd = (dhd_info_t *)(pub->info);
-
-	if (dhd && (wake_lock_active(&dhd->wl_wifi) ||
-	    wake_lock_active(&dhd->wl_wdwake)))
-		return 1;
-#endif
-	return 0;
-}
-
 int net_os_wake_unlock(struct net_device *dev)
 {
 	dhd_info_t *dhd = *(dhd_info_t **)netdev_priv(dev);
