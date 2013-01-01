@@ -157,7 +157,6 @@ obj-$(CONFIG_MSM_IPC_ROUTER_SMD_XPRT) += ipc_router_smd_xprt.o
 obj-$(CONFIG_MSM_IPC_ROUTER) += ipc_router.o
 obj-$(CONFIG_MSM_IPC_ROUTER)+= ipc_socket.o
 obj-$(CONFIG_MSM_DALRPC) += dal.o
-obj-$(CONFIG_MSM_DALRPC_TEST) += dal_remotetest.o
 #obj-$(CONFIG_ARCH_MSM7X30) += dal_axi.o
 obj-$(CONFIG_ARCH_MSM7X30) += dal_axi.o htc_drm.o htc_sdservice.o
 obj-$(CONFIG_ARCH_MSM7X27A) += dal_axi.o
