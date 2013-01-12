@@ -42,7 +42,7 @@ extern struct platform_device msm_device_mddi0;
 #define MSM_RAM_CONSOLE_SIZE	0x00100000
 
 #define MSM_PMEM_ADSP_BASE  	0x2B900000
-#define MSM_PMEM_ADSP_SIZE	0x01E00000 /* for 8M(4:3) + gpu effect */
+#define MSM_PMEM_ADSP_SIZE	0x03600000 /* for 8M(4:3) + gpu effect */
 #define PMEM_KERNEL_EBI1_BASE   0x2D600000
 #define PMEM_KERNEL_EBI1_SIZE   0x00700000
 #define MSM_PMEM_SF_SIZE	0x1C00000
@@ -55,7 +55,7 @@ extern struct platform_device msm_device_mddi0;
 #define MSM_PMEM_MDP_SIZE	0x02000000
 
 #define MSM_FB_BASE		0x2FD00000
-#define MSM_FB_SIZE		0x00465000
+#define MSM_FB_SIZE		0x00300000
 
 /* GPIO definition */
 
