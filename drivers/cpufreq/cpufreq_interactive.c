@@ -1,4 +1,6 @@
 /*
+ * drivers/cpufreq/cpufreq_interactive.c
+ *
  * Copyright (C) 2010 Google, Inc.
  *
  * This software is licensed under the terms of the GNU General Public
@@ -10,10 +12,10 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * Author: Mike Chan (mike at android.com)
+ * Author: Mike Chan (mike@android.com)
+ *
  */
 
-#include <linux/module.h>
 #include <linux/cpu.h>
 #include <linux/cpumask.h>
 #include <linux/cpufreq.h>
@@ -25,6 +27,8 @@
 #include <linux/workqueue.h>
 #include <linux/kthread.h>
 #include <linux/mutex.h>
+
+#include <asm/cputime.h>
 
 static atomic_t active_count = ATOMIC_INIT(0);
 
@@ -65,13 +69,13 @@ static unsigned long go_hispeed_load;
 /*
  * The minimum amount of time to spend at a frequency before we can ramp down.
  */
-#define DEFAULT_MIN_SAMPLE_TIME (20 * USEC_PER_MSEC)
+#define DEFAULT_MIN_SAMPLE_TIME 20 * USEC_PER_MSEC
 static unsigned long min_sample_time;
 
 /*
  * The sample rate of the timer used to increase frequency
  */
-#define DEFAULT_TIMER_RATE (20 * USEC_PER_MSEC)
+#define DEFAULT_TIMER_RATE 20 * USEC_PER_MSEC
 static unsigned long timer_rate;
 
 static int cpufreq_governor_interactive(struct cpufreq_policy *policy,
@@ -125,8 +129,9 @@ static void cpufreq_interactive_timer(unsigned long data)
 	if (!idle_exit_time)
 		goto exit;
 
-	delta_idle = (unsigned int) (now_idle - time_in_idle);
-	delta_time = (unsigned int) (pcpu->timer_run_time - idle_exit_time);
+	delta_idle = (unsigned int) cputime64_sub(now_idle, time_in_idle);
+	delta_time = (unsigned int) cputime64_sub(pcpu->timer_run_time,
+						  idle_exit_time);
 
 	/*
 	 * If timer ran less than 1ms after short-term sample started, retry.
@@ -139,8 +144,10 @@ static void cpufreq_interactive_timer(unsigned long data)
 	else
 		cpu_load = 100 * (delta_time - delta_idle) / delta_time;
 
-	delta_idle = (unsigned int) (now_idle - pcpu->freq_change_time_in_idle);
-	delta_time = (unsigned int) (pcpu->timer_run_time - pcpu->freq_change_time);
+	delta_idle = (unsigned int) cputime64_sub(now_idle,
+						pcpu->freq_change_time_in_idle);
+	delta_time = (unsigned int) cputime64_sub(pcpu->timer_run_time,
+						  pcpu->freq_change_time);
 
 	if ((delta_time == 0) || (delta_idle > delta_time))
 		load_since_change = 0;
@@ -183,8 +190,8 @@ static void cpufreq_interactive_timer(unsigned long data)
 	 * minimum sample time.
 	 */
 	if (new_freq < pcpu->target_freq) {
-		if (pcpu->timer_run_time - pcpu->freq_change_time
-				< min_sample_time)
+		if (cputime64_sub(pcpu->timer_run_time, pcpu->freq_change_time)
+		    < min_sample_time)
 			goto rearm;
 	}
 
@@ -614,10 +621,10 @@ static int cpufreq_interactive_idle_notifier(struct notifier_block *nb,
 					     void *data)
 {
 	switch (val) {
-	case SCHED_IDLE_START:
+	case IDLE_START:
 		cpufreq_interactive_idle_start();
 		break;
-	case SCHED_IDLE_END:
+	case IDLE_END:
 		cpufreq_interactive_idle_end();
 		break;
 	}
@@ -669,7 +676,7 @@ static int __init cpufreq_interactive_init(void)
 	spin_lock_init(&down_cpumask_lock);
 	mutex_init(&set_speed_lock);
 
-	sched_idle_notifier_register(&cpufreq_interactive_idle_nb);
+	idle_notifier_register(&cpufreq_interactive_idle_nb);
 
 	return cpufreq_register_governor(&cpufreq_gov_interactive);
 
@@ -694,7 +701,7 @@ static void __exit cpufreq_interactive_exit(void)
 
 module_exit(cpufreq_interactive_exit);
 
-MODULE_AUTHOR("Mike Chan <mike at android.com>");
+MODULE_AUTHOR("Mike Chan <mike@android.com>");
 MODULE_DESCRIPTION("'cpufreq_interactive' - A cpufreq governor for "
 	"Latency sensitive workloads");
 MODULE_LICENSE("GPL");
