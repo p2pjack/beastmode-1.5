@@ -45,7 +45,7 @@ extern struct platform_device msm_device_mddi0;
 #define MSM_PMEM_ADSP_SIZE	0x03600000 /* for 8M(4:3) + gpu effect */
 #define PMEM_KERNEL_EBI1_BASE   0x2D600000
 #define PMEM_KERNEL_EBI1_SIZE   0x00700000
-#define MSM_PMEM_SF_SIZE	0x1C00000
+#define MSM_PMEM_SF_SIZE	0x02000000
 #define MSM_PMEM_AUDIO_SIZE	0x00200000
 
 #define MSM_PMEM_CAMERA_BASE	0x2DD00000

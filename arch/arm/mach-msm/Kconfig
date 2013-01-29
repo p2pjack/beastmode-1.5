@@ -1621,6 +1621,27 @@ config MSM_CPU_FREQ_ONDEMAND_MIN
 
 endif # PERFLOCK
 
+config ACPU_HIGH_OC
+	bool "Enable Higher ACPU OC"
+	default n
+	depends on ACPUCLOCK_OVERCLOCKING && ARCH_MSM7X30
+	help
+	  Allow max 2GHz acpu overclock for Spade ARM devices.
+
+config ACPU_HIGH_BUS_OC
+        bool "Enable Higher Bus OC"
+        default n
+        depends on ACPUCLOCK_OVERCLOCKING && ARCH_MSM7X30
+        help
+          Allow experimental high bus overclocks on 7x30 ARM.
+
+config ACPU_AGGRESSIVE_BUS
+        bool "Enable Higher PLL2"
+        default n  
+        depends on ACPUCLOCK_OVERCLOCKING && ARCH_MSM7X30
+        help
+          Shift entire PLL2 table upward for more aggressive bus clocks.
+
 config ACPUCLOCK_OVERCLOCKING
 	bool "Enable support for CPU overclocking"
 	default n
